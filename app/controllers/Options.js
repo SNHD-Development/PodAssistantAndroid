@@ -38,18 +38,32 @@ function pickerCipro_onDone(e){
 	$.txtCiproLot.value = value;
 }
 
+function getSelectedValue(vals, txt){
+	var a = "";
+	vals = vals[0];
+	for (var prop in vals){
+		if (a==""){
+			a = prop;
+		}
+		if (vals[prop] == txt.value){
+			a = prop;
+		}
+	}
+	return [a];
+}
+
 function setupDoxyPicker(){
 	if (!$.lotNumbers || !$.lotNumbers.Doxy || $.lotNumbers.Doxy.length == 0){
 		return;
 	}
 	$.txtDoxyLot.blur();
-	var currentDoxyLot = 
+	var vals = [pickerValueBuilder($.lotNumbers.Doxy)];
 	Alloy.createWidget('danielhanold.pickerWidget', {
 	  id: 'mySingleColumn',
 	  outerView: $.winOptions,
-	  hideNavBar: false,
 	  type: 'single-column',
-	  pickerValues: [pickerValueBuilder($.lotNumbers.Doxy)],
+	  selectedValues: getSelectedValue(vals,$.txtDoxyLot),
+	  pickerValues: vals,
 	  onDone: pickerDoxy_onDone
 	});
 }
@@ -59,11 +73,13 @@ function setupCiproPicker(){
 		return;
 	}
 	$.txtCiproLot.blur();
+	var vals = [pickerValueBuilder($.lotNumbers.Cipro)];
 	Alloy.createWidget('danielhanold.pickerWidget', {
 	  id: 'mySingleColumn',
 	  outerView: $.winOptions,
 	  hideNavBar: false,
 	  type: 'single-column',
+	  selectedValues: getSelectedValue(vals,$.txtCiproLot),
 	  pickerValues: [pickerValueBuilder($.lotNumbers.Cipro)],
 	  onDone: pickerCipro_onDone
 	});

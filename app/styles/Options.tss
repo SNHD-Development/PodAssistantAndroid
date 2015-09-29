@@ -1,6 +1,7 @@
 
 ".container" : {
-	backgroundColor: "white"
+	backgroundColor: "white",
+	layout: "vertical"
 }
 
 ".cLabel":{
@@ -33,9 +34,4 @@
 	font: {
 		fontSize: 14
 	},
-}
-
-"#svMain":{
-	top: 5,
-	layout: "vertical"
 }

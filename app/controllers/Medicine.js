@@ -20,14 +20,12 @@ function btnSave_onClick(){
 		Alloy.Globals.Tracker.trackEvent({
 		    category: "UserActions",
 		    action: "Changed lot number",
-		    value: args.medicine.MemberName_fullname_first_name + " " + args.medicine.MemberName_fullname_last_name
+		    label: args.medicine.MemberName_fullname_first_name + " " + args.medicine.MemberName_fullname_last_name
 		});
 	}
 	args.medicine.LotNumber = $.txtLot.value.trim();
-	if ($.taComment.value != ""){
-		args.medicine.Comment = $.taComment.value;
-	}
-	args.medicine.PickedUp = $.tbPickedUp.index == 0 ? true : false;
+	args.medicine.Comment = $.taComment.value;
+	args.medicine.PickedUp = $.sPickedUp.value == true ? true : false;
 	if (args.medicine.PickedUp == false){
 		args.medicine.PickedUpLocation = "";
 	}else{
@@ -43,14 +41,21 @@ function picker_onDone(e){
   		return;
   	var value = e.data[0].value;
   	$.txtType.setValue(value);
+  	switch (value){
+  		case "Doxycycline":
+  			$.txtLot.value = Alloy.Globals.DefaultDoxyLotNum;
+  			break;
+  		case "Ciprofloxacin":
+  			$.txtLot.value = Alloy.Globals.DefaultCiproLotNum;
+  			break;
+  		case "Medical":
+  			break;
+  		default:
+  			break;
+  	}
 }
 
 function txtType_onClick(){
-	removeKeyboard();
-	setupPicker();
-}
-
-function txtType_onFocus(){
 	removeKeyboard();
 	setupPicker();
 }
@@ -59,25 +64,41 @@ function btnQ_onClick(){
 	var view = Alloy.createController('Questions',{
 		data: args.medicine
 	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);
+	view.open();
 }
+
+function getSelectedValue(vals, txt){
+	var a = "";
+	vals = vals[0];
+	for (var prop in vals){
+		if (a==""){
+			a = prop;
+		}
+		if (vals[prop] == txt.value){
+			a = prop;
+		}
+	}
+	return [a];
+}
+
 
 function setupPicker(){
 	$.txtType.blur();
+	var vals = [{"C": "Ciprofloxacin", "D": "Doxycycline", "M": "Medical"}];
 	Alloy.createWidget('danielhanold.pickerWidget', {
 	  id: 'mySingleColumn',
 	  outerView: $.winMedicine,
 	  hideNavBar: false,
 	  type: 'single-column',
-	  selectedValues: [args.medicine.Medicine.toUpperCase()],
-	  pickerValues: [{"C": "Ciprofloxacin", "D": "Doxycycline", "M": "Medical"}],
+	  selectedValues: getSelectedValue(vals, $.txtType),
+	  pickerValues: vals,
 	  onDone: picker_onDone
 	});
 }
 
 function init(){
 	$.winMedicine.title = args.medicine.MemberName_fullname_first_name + " " + args.medicine.MemberName_fullname_last_name;
-	$.tbPickedUp.index = args.medicine.PickedUp ? 0 : 1;
+	$.sPickedUp.value = args.medicine.PickedUp ? true : false;
 	$.txtType.value = util.getMedicineLongName(args.medicine.Medicine);
 	$.txtLot.value = args.medicine.LotNumber;
 	$.taComment.value = args.medicine.Comment == null ? "" : args.medicine.Comment;

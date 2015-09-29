@@ -2,10 +2,10 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>org.cchd.podapp</id>
     <name>POD Assistant</name>
-    <version>1.02</version>
+    <version>1.0</version>
     <publisher>Southern Nevada Health District</publisher>
     <url>https://southernnevadahealthdistrict.org/</url>
-    <description>This app is to be used by personnel at POD (Pont of Dispensing) sites to dispense medicine. A POD is a location where you can go to get medications or vaccines during a public health emergency.</description>
+    <description>This app is to be used by personnel at POD (Point of Dispensing) sites to dispense medicine. A POD is a location where you can go to get medications or vaccines during a public health emergency.</description>
     <copyright>2015 by Southern Nevada Health District</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
@@ -13,32 +13,11 @@
     <analytics>true</analytics>
     <guid>5a7f72af-86e2-469d-9000-e7e4761a8652</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
-    <ios>
-        <plist>
-            <dict>
-                <key>UISupportedInterfaceOrientations~iphone</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                </array>
-                <key>UISupportedInterfaceOrientations~ipad</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-                    <string>UIInterfaceOrientationLandscapeLeft</string>
-                    <string>UIInterfaceOrientationLandscapeRight</string>
-                </array>
-                <key>UIRequiresPersistentWiFi</key>
-                <false/>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-                <key>UIStatusBarHidden</key>
-                <false/>
-                <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleDefault</string>
-            </dict>
-        </plist>
-    </ios>
-    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest android:versionCode="100" android:versionName="1.0.0">
+            <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="21"/>
+        </manifest>
+    </android>
     <mobileweb>
         <precache/>
         <splash>
@@ -48,18 +27,18 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="iphone">com.acktie.mobile.ios.qr</module>
-        <module platform="iphone">analytics.google</module>
-        <module platform="iphone" version="1.2.0">ti.imagefactory</module>
+        <module platform="android">analytics.google</module>
+        <module platform="android" version="2.2.1">ti.imagefactory</module>
+        <module platform="android">com.acktie.mobile.android.qr</module>
     </modules>
     <deployment-targets>
-        <target device="android">false</target>
-        <target device="ipad">true</target>
-        <target device="iphone">true</target>
+        <target device="android">true</target>
+        <target device="ipad">false</target>
+        <target device="iphone">false</target>
         <target device="mobileweb">false</target>
         <target device="windows">false</target>
     </deployment-targets>
-    <sdk-version>4.1.0.GA</sdk-version>
+    <sdk-version>5.0.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

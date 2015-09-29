@@ -7,7 +7,9 @@
 
 "#tvSearchResults":{
 	height: Titanium.UI.SIZE,
-	top: 0
+	backgroundColor: "white",
+	top: 0,
+	separatorColor: "#eee"
 }
 
 "Label":{
@@ -16,7 +18,7 @@
 }
 
 ".ctrSearchResult":{
-	height: 95,
+	height: 95
 }
 
 ".cName":{

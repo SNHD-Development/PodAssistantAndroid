@@ -27,3 +27,8 @@ exports.newGuid = function(){
 	    return v.toString(16);
 	});
 };
+
+
+exports.convertPixelsToDip = function(pixels){
+	return pixels / (Titanium.Platform.displayCaps.dpi / 160);
+};

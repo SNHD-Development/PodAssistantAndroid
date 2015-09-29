@@ -1,6 +1,7 @@
 
 ".container" : {
-  backgroundColor: 'white',
+  backgroundColor: "white",
+  layout: "vertical"
 }
 
 "TextField":{
@@ -12,31 +13,18 @@
 }
 
 "TextField[formFactor=tablet]":{
-	top: 15
-}
-
-"TextField[formFactor=tablet]":{
+	top: 15,
 	width: "50%"
-}
-
-"#btnLogout":{
-	width: 80,
-	bottom: 20,
-	zIndex: 2
 }
 
 "#btnQr":{
 	width: '100%',
-	height: 160,
+	height: 10,
 	backgroundColor: '#f0dec8',
 	color: "#796857",
 	font: {
 		fontSize: 15
 	},
-}
-
-"#vManualSearch":{
-	layout: "vertical"
 }
 
 "#btnSearch":{
@@ -56,31 +44,5 @@
 
 "#txtFirstName[formFactor=tablet]":{
 	top: 30
-}
-
-
-"#lblPodLocation":{
-	top: 30,
-	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-	width: "100%",
-	color: "#555",
-	font:{
-		fontSize: 18,
-		fontWeight: "bold"
-	}
-}
-
-"#ivGears":{
-	image: "/images/gears.png",
-	height: 30,
-	width: 30,
-	right: 20
-}
-
-"#vGears":{
-	top: 25,
-	right: 0,
-	width: 65,
-	height: Ti.UI.SIZE
 }
 

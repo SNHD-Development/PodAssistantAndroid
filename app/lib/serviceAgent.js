@@ -144,9 +144,11 @@ exports.getSignature = function(id, cb){
 	}
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.open("GET", Alloy.CFG.ApiBaseUri + "Files/" + id);
+	console.log(Alloy.CFG.ApiBaseUri + "Files/" + id);
 	xhr.setRequestHeader('Authorization', getAuthHeader());
+	xhr.setRequestHeader('Accept', "application/json");
 	xhr.onload = function() {
-		cb(null, JSON.parse(this.responseData));
+		cb(null, JSON.parse(this.responseText));
 	};
 	xhr.onerror = function(e){
 		var err = "Error in getSignature. Status Code: " + this.status + ', ' + e.code + e.error;
@@ -171,6 +173,8 @@ function deleteOldSignature(id){
 		console.log("Deleted signature successfully");
 	};
 	xhr.onerror = function(e){
+		if (this.status == 204)
+			return;
 		var err = "Error in delelteOldSignature. Status Code: " + this.status + ', ' + e.code + e.error;
 		console.log(err);
 		Alloy.Globals.Tracker.trackException({
@@ -247,11 +251,16 @@ function saveFormContent(form, cb){
 		}
 	};
 	xhr.onerror = function(e){
+		if (this.status == 204){
+			cb(null);
+			return;
+		}
 		var err = "Error in saveFormContent. Status Code: " + this.status + ", " + e.code + e.error;
 		Alloy.Globals.Tracker.trackException({
 		    description: err,
 		    fatal: false
 		});
+		console.log(err);
 		cb(true);
 	};
 	xhr.send(payload);
@@ -276,6 +285,7 @@ exports.saveForm = function(form, cb){
 			    description: err,
 			    fatal: false
 			});
+			console.log(err);
 			cb(true);
 		}else{
 			if (Alloy.Globals.OldSignatureId != ""){

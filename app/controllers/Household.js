@@ -23,7 +23,7 @@ function tvMembers_onClick(e){
 		medicine: m,
 		cbMedicineSaved : cbMedicineSaved
 	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);
+	view.open();
 }
 
 function cbMedicineSaved(){
@@ -72,14 +72,14 @@ function cbFormSaved(err){
 }
 
 function cbUpdateSignature(e){
-	var imageDataBase64 = e.data.replace(/^data:image\/(png|jpg);base64,/, "");
+	var imageDataBase64 = e.data.replace(/^data:image\/(png|jpeg);base64,/, "");
 	var imageData = Ti.Utils.base64decode(imageDataBase64);	
 	var resizedImageData = imageFactory.imageAsResized(imageData, {
 		width: 560,
 		height: 300,
-		quality: imageFactory.QUALITY_LOW
+		quality: 1
 	});
-	var resizedImageData = imageFactory.compress(resizedImageData, 0.1);
+	var resizedImageData = imageFactory.compress(resizedImageData, 0.2);
 	var resizedBase64ImageData = Ti.Utils.base64encode(resizedImageData);
 	$.ivSignature.image = resizedImageData;
 	if ($.msForm.Fields.YourSignature != null && $.msForm.Fields.YourSignature.length == 24){
@@ -93,7 +93,7 @@ function vSignature_onClick(){
 	var view = Alloy.createController('Signature',{
 		onSave: cbUpdateSignature
 	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);
+	view.open();
 }
 
 function setDefaultPickup(){
@@ -137,6 +137,7 @@ function setStatusLabel(status){
 }
 
 function init(){
+	Alloy.Globals.OldSignatureId = "";
 	setStatusLabel($.msForm.Status);
 	$.lblPhone.text = $.msForm.Fields.YourPhone;
 	var addr = $.msForm.Fields.YourAddress_address_street + "\n" +

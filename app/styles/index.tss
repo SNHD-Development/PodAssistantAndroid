@@ -10,11 +10,7 @@
 }
 
 "TextField":{
-	backgroundColor:'white',
 	width: 250,
-	font: {
-		fontSize: 13
-	},
 	height: 45,
 	bubbleParent: false,
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
@@ -27,7 +23,6 @@
 	font: {
 		fontSize: 28,
 		fontFamily: 'Trebuchet MS',
-		fontWeight: "bold"
 	},
 }
 
@@ -70,5 +65,5 @@
 }
 
 "#winIndex":{
-	opacity: 0
+	fullscreen: true 
 }

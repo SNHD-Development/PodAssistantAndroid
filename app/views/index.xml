@@ -1,15 +1,13 @@
 <Alloy>
-	<NavigationWindow id="nwMain">
-		<Window id="winIndex" class="container" onClick="winIndex_onClick">
-			<Label class="appTitle">POD ASSISTANT</Label>
-			<TextField id="txtUsername" hintText="Username" top="20" />
-			<TextField id="txtPassword" hintText="Password" passwordMask="true" top="10" />
-			<Button id="btnLogin" title="LOGIN" onClick="btnLogin_onClick"></Button>
-			<Label id="lblAuthResult"></Label>
-			<View>
-				<ImageView id="ivSnhdLogo"></ImageView>
-				<ImageView id="ivFooter" />	
-			</View>
-		</Window>
-	</NavigationWindow>
+	<Window id="winIndex" class="container" onClick="winIndex_onClick">
+		<Label class="appTitle">POD ASSISTANT</Label>
+		<TextField id="txtUsername" hintText="Username" top="20" />
+		<TextField id="txtPassword" hintText="Password" passwordMask="true" top="10" />
+		<Button id="btnLogin" title="LOGIN" onClick="btnLogin_onClick"></Button>
+		<Label id="lblAuthResult"></Label>
+		<View>
+			<ImageView id="ivSnhdLogo"></ImageView>
+			<ImageView id="ivFooter" />	
+		</View>
+	</Window>
 </Alloy>

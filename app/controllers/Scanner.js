@@ -1,4 +1,4 @@
-var qrreader = require("com.acktie.mobile.ios.qr"); 
+var qrreader = require("com.acktie.mobile.android.qr"); 
 
 var args = arguments[0] || {};
 

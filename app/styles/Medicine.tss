@@ -14,6 +14,12 @@
 "#btnQ":{
 	left: 20,
 	top: 20,
+	backgroundColor: "#eee",
+	width: 150,
+	color: "#555",
+	font: {
+		fontSize: 14
+	}
 }
 
 "#btnSave":{
@@ -36,6 +42,14 @@
 	left: 20
 }
 
+"#sPickedUp":{
+	value: true,
+	style: Ti.UI.Android.SWITCH_STYLE_TOGGLEBUTTON,
+	titleOn:"Yes",
+  	titleOff:"No",
+  	left: 10
+}
+
 "#txtType":{
 	bubbleParent: false,
 	editable: false	
@@ -54,16 +68,10 @@
 	borderColor: '#eee',
 	borderRadius: 5,
 	returnKeyType: Titanium.UI.RETURNKEY_DONE,
-	font: {
-		fontSize: 17
-	},
 }
 
-"#tbPickedUp":{
-	left: 20,
-	height: 30,
-	width: 100,
-	backgroundColor: "#d1c1ae"
+"#lblPickedUp":{
+	color: "#555"
 }
 
 ".cLabel":{

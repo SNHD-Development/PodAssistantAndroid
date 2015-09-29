@@ -21,7 +21,7 @@ function cbAuth(err, success){
 		serviceAgent.getDefaultLotNumbers();
 		animation.fadeOut($.lblAuthResult, 1);
 		var view = Alloy.createController('Search',{}).getView();
-		Alloy.Globals.nwMain.openWindow(view);
+		view.open();
 		Alloy.Globals.Tracker.trackEvent({
 		    category: "UserActions",
 		    action: "Login success"
@@ -34,10 +34,17 @@ function winIndex_onClick(){
 	$.txtPassword.blur();
 }
 
+$.winIndex.addEventListener('open',function(){
+    var activity=$.winIndex.getActivity();
+    if (activity){
+        var actionBar=activity.getActionBar();
+        if (actionBar){
+        	actionBar.hide();
+        }    
+    }
+});
+
 function init(){
-	animation.fadeIn($.winIndex, 2000);
-	Alloy.Globals.nwMain = $.nwMain;
-	$.winIndex.hideNavBar();
 	Alloy.Globals.Tracker.trackScreen({
 	    screenName: "Login"
 	});
@@ -45,4 +52,5 @@ function init(){
 
 init();
 
-$.nwMain.open();
+$.winIndex.open();
+

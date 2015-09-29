@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container">
+	<Window class="container" title="Scanner">
 		<Button id="btnClose" title="Close" onClick="btnClose_onClose"></Button>
 		<Label>Toggle Light</Label>
 		<Switch id="sLight" onChange="sLight_onChange"/>

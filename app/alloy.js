@@ -15,13 +15,18 @@ GA.dryRun = false;
 GA.dispatchInterval = 10;
 Alloy.Globals.Tracker = GA.getTracker("UA-67738110-1");
 
+if (Alloy.Globals.Tracker.trackException == null){
+	console.log("mmd");
+	Alloy.Globals.Tracker.trackException = function(){};
+}
+
 Alloy.Globals.Loader = Alloy.createWidget('com.caffeinalab.titanium.loader', {
     message: "Loading...",
     cancelable: true,
     useImages: false
 });
 
-Alloy.Collections.isTablet = Ti.Platform.osname === "ipad";
+Alloy.Globals.isTablet = Ti.Platform.osname === "ipad";
 Alloy.Collections.houseMembers = new Backbone.Collection();
 Alloy.Collections.searchResults = new Backbone.Collection();
 

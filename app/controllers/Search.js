@@ -1,9 +1,7 @@
 var serviceAgent = require('serviceAgent');
-var args = arguments[0] || {};
+var util = require("util");
 
-function btnLogout_onClick(){
-	$.winSearch.close();
-}
+var args = arguments[0] || {};
  
 function btnQr_onClick(){
 	var view = Alloy.createController('Scanner',{
@@ -33,7 +31,7 @@ function cbFormLookupResult(err, d){
 	var view = Alloy.createController('Household',{
 		msForm: d
 	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);	
+	view.open(); 
 }
 
 function cbSearchResults(err, searchResults){
@@ -47,14 +45,7 @@ function cbSearchResults(err, searchResults){
 	var view = Alloy.createController('SearchResults',{
 		searchResults: searchResults
 	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);
-}
-
-function vGears_onClick(){
-	var view = Alloy.createController('Options',{
-		
-	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);
+	view.open();
 }
 
 function btnSearch_onClick(){
@@ -62,7 +53,7 @@ function btnSearch_onClick(){
 	var lastName = $.txtLastName.value.trim();
 	var phoneNumber = $.txtPhoneNumber.value.trim();
 	if (!phoneNumber && (!firstName || !lastName)){
-		alert ("Please enter both first name and last name to search");
+		alert ("Please enter both first name and last name, or a phone number to search");
 		return;
 	}
 	// if (!firstName || !lastName){
@@ -79,18 +70,34 @@ function winSearch_onClick(){
 	$.txtPhoneNumber.blur();
 }
 
+$.winSearch.addEventListener('open',function(){
+    var activity=$.winSearch.getActivity();
+    if (activity){
+    	activity.onCreateOptionsMenu = function(e) {
+			var menuItem = e.menu.add({
+				itemId : 0,
+	            icon: "/images/gears.png",
+	            showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+			});
+			menuItem.addEventListener("click", function(e) {
+				var view = Alloy.createController('Options',{}).getView();
+				view.open();
+	        });
+	        menuItem = e.menu.add({
+				itemId : 1,
+	            icon: "/images/logout.png",
+	            showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+			});
+			menuItem.addEventListener("click", function(e) {
+				$.winSearch.close();
+	        });
+		};
+	};
+});
 
 function init(){
-	$.btnQr.height = Ti.Platform.displayCaps.platformHeight / 3;
-	$.vManualSearch.top = 60;
-	//$.vManualSearch.top = $.btnQr.top + $.btnQr.height;
-	$.winSearch.hideNavBar();
-	if (Alloy.Globals.isiOS4){
-		console.log('mw');
-		$.btnLogout.left = 0;
-		$.btnLogout.bottom = 30;
-	}
-	$.lblPodLocation.text = Alloy.Globals.PodLocation.toUpperCase();
+	$.btnQr.height = util.convertPixelsToDip(Ti.Platform.displayCaps.platformHeight) / 3;
+	$.winSearch.title = Alloy.Globals.PodLocation.toUpperCase();
 	Alloy.Globals.Tracker.trackScreen({
 	    screenName: "Search"
 	});

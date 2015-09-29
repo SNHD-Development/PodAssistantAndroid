@@ -18,7 +18,7 @@ function cbFormLookupResult(err, form){
 	var view = Alloy.createController('Household',{
 		msForm: form
 	}).getView();
-	Alloy.Globals.nwMain.openWindow(view);
+	view.open();
 }
 
 function init(){

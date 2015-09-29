@@ -24,3 +24,20 @@ overrode the settings with other TSS, XML, or JS settings:
 }
 
 */
+
+"TextField":{
+	borderColor: "#eee",
+	color: "#555",
+	hintTextColor: "#888",
+	borderWidth: 1,
+	font: {
+		fontSize: 13
+	},
+}
+
+"TextArea":{
+	color: "#555",
+	font: {
+		fontSize: 13
+	},
+}
