@@ -1,12 +1,13 @@
 var util = require("util");
 var args = arguments[0] || {};
 
-var prevOrientation = "";
 Titanium.App.addEventListener("app:signature:capture", cbSignatureCaptured);
 
 function cbSignatureCaptured(e){
 	Titanium.App.removeEventListener("app:signature:capture", cbSignatureCaptured);
 	$.winSignature.close();
+	Alloy.Globals.SignatureCaptured = true;
+	Alloy.Globals.PendingChanges = true;
 	args.onSave(e);
 }
 
@@ -17,12 +18,6 @@ function btnClear_onClick(){
 function btnSave_onClick(){
 	$.sigCapture.save();
 }
-
-$.winSignature.addEventListener('close',function(){
-	if (prevOrientation != ""){
-		$.winSignature.setOrientationModes([prevOrientation]);
-	}
-});
 
 $.winSignature.addEventListener('open',function(){
     var activity=$.winSignature.getActivity();
@@ -41,7 +36,6 @@ function init(){
 	var multiplier = widthMultiplier > heightMultiplier ? heightMultiplier : widthMultiplier;
 	multiplier = multiplier <= 0 ? 1 : multiplier;
 	if (!Alloy.Globals.isTablet){
-		prevOrientation = $.winSignature.getOrientation();
 		$.winSignature.setOrientationModes([Ti.UI.LANDSCAPE_LEFT]);
 	}
 	$.sigCapture.init({
@@ -49,11 +43,6 @@ function init(){
 		width: multiplier * Alloy.CFG.SignatureImageWidth,
 		height: multiplier * Alloy.CFG.SignatureImageHeight
 	});
-	// $.sigCapture.init({
-	    // borderColor:" #aaa",
-		// width: 100,
-		// height: 100
-	// });
 	Alloy.Globals.Tracker.trackScreen({
 	    screenName: "Signature"
 	});

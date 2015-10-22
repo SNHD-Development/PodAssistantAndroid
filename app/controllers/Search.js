@@ -1,38 +1,8 @@
 var serviceAgent = require('serviceAgent');
 var util = require("util");
+var async = require('async');
 
 var args = arguments[0] || {};
- 
-function btnQr_onClick(){
-	var view = Alloy.createController('Scanner',{
-		onScannerResult: cbScannerResult
-	}).getView();
-	view.open({modal:true});
-}
-
-function cbScannerResult(err, formId){
-	if (err){
-		alert ("Unable to scan QR code");
-		return;
-	}
-	var isValidMongoId = formId.length == 24;
-	if (!isValidMongoId){
-		alert ("That was not an acceptable QR code.");
-		return;
-	}
-	serviceAgent.getMsFormById(formId,cbFormLookupResult);
-}
-
-function cbFormLookupResult(err, d){
-	if (err || d == null){
-		alert ("Unable to open form");
-		return;
-	}
-	var view = Alloy.createController('Household',{
-		msForm: d
-	}).getView();
-	view.open(); 
-}
 
 function cbSearchResults(err, searchResults){
 	Alloy.Globals.Loader.hide();
@@ -45,21 +15,27 @@ function cbSearchResults(err, searchResults){
 	var view = Alloy.createController('SearchResults',{
 		searchResults: searchResults
 	}).getView();
+	$.txtFirstName.value = "";
+	$.txtLastName.value = "";
+	$.txtPhoneNumber.value = "";
+
 	view.open();
 }
 
 function btnSearch_onClick(){
+	$.btnSearch.enabled = false;
 	var firstName = $.txtFirstName.value.trim();
 	var lastName = $.txtLastName.value.trim();
 	var phoneNumber = $.txtPhoneNumber.value.trim();
+	if ((Ti.App.deployType == "test" || Ti.App.deployType == "development") &&
+		(!firstName && !lastName)){
+		firstName = "Fred";
+		lastName = "Jones";
+	}
 	if (!phoneNumber && (!firstName || !lastName)){
 		alert ("Please enter both first name and last name, or a phone number to search");
 		return;
 	}
-	// if (!firstName || !lastName){
-		// firstName = "Mike";
-		// lastName = "Jones";
-	// }
 	Alloy.Globals.Loader.show();
 	serviceAgent.getSearchResults(firstName,lastName,phoneNumber,cbSearchResults);
 }
@@ -96,7 +72,6 @@ $.winSearch.addEventListener('open',function(){
 });
 
 function init(){
-	$.btnQr.height = util.convertPixelsToDip(Ti.Platform.displayCaps.platformHeight) / 3;
 	$.winSearch.title = Alloy.Globals.PodLocation.toUpperCase();
 	Alloy.Globals.Tracker.trackScreen({
 	    screenName: "Search"

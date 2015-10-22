@@ -6,6 +6,7 @@ var qrCodeView;
 
 function btnClose_onClose(){
 	qrCodeView.stop();
+	qrCodeView = null;
 	$.Scanner.close();
 }
 
@@ -18,19 +19,22 @@ function sLight_onChange(e){
 }
 
 function cancel() {
+	qrCodeView.stop();
+	qrCodeView = null;
 	console.log('QR Reader Cancel');
 };
 
 function success(data) {
+	qrCodeView.stop(); 
+	qrCodeView = null;
 	if (data != undefined && data.data != undefined) {
-		Titanium.Media.vibrate();
-		qrCodeView.stop();
-		$.Scanner.close();
 		args.onScannerResult(null, data.data);
 	}else{
 		args.onScannerResult(true);
 	}
+	$.Scanner.close();
 };
+
 
 function init(){
 	var options = {

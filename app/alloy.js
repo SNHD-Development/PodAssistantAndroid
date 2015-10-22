@@ -16,7 +16,6 @@ GA.dispatchInterval = 10;
 Alloy.Globals.Tracker = GA.getTracker("UA-67738110-1");
 
 if (Alloy.Globals.Tracker.trackException == null){
-	console.log("mmd");
 	Alloy.Globals.Tracker.trackException = function(){};
 }
 

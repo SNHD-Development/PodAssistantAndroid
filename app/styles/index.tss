@@ -13,9 +13,14 @@
 	width: 250,
 	height: 45,
 	bubbleParent: false,
+	autocapitalization: false,
+	autocorrect: false,
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 }
 
+"#txtUsername":{
+	autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_ALL
+}
 
 ".appTitle":{
 	top: 110,

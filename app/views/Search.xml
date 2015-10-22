@@ -1,6 +1,5 @@
 <Alloy>
 	<Window id="winSearch" class="container" onClick="winSearch_onClick">
-		<Button id="btnQr" title="Use QR Reader" onClick="btnQr_onClick"></Button>
 		<TextField id="txtFirstName" hintText="First Name" />
 		<TextField id="txtLastName" hintText="Last Name" />
 		<TextField id="txtPhoneNumber" hintText="Phone Number" />

@@ -9,6 +9,19 @@ function winMedicine_onClick(){
 	removeKeyboard();
 }
 
+function isAllowedToSave(){
+	if ($.txtType.value == "Medical"){
+		alert ("Medical is not a valid pick up type");
+		return false; 
+	}
+	
+	if ($.txtType.value == "Other" && $.taComment.value.trim() == ""){
+		alert ("A comment is required for \"Other\" medicine type.");
+		return false; 
+	}
+	return true;
+}
+
 function removeKeyboard(){
 	$.txtType.blur();
 	$.txtLot.blur();
@@ -16,6 +29,9 @@ function removeKeyboard(){
 }
 
 function btnSave_onClick(){
+	if (!isAllowedToSave()){
+		return;
+	}
 	if (args.medicine.LotNumber != $.txtLot.value.trim()){
 		Alloy.Globals.Tracker.trackEvent({
 		    category: "UserActions",
@@ -32,6 +48,7 @@ function btnSave_onClick(){
 		args.medicine.PickedUpLocation = Alloy.Globals.PodLocation;
 	}
 	args.medicine.Medicine = util.getMedicineShortName($.txtType.value);
+	Alloy.Globals.PendingChanges = true;
 	$.cbMedicineSaved();
 	$.winMedicine.close();
 }
@@ -84,7 +101,7 @@ function getSelectedValue(vals, txt){
 
 function setupPicker(){
 	$.txtType.blur();
-	var vals = [{"C": "Ciprofloxacin", "D": "Doxycycline", "M": "Medical"}];
+	var vals = [{"C": "Ciprofloxacin", "D": "Doxycycline", "M": "Medical", "O":"Other"}];
 	Alloy.createWidget('danielhanold.pickerWidget', {
 	  id: 'mySingleColumn',
 	  outerView: $.winMedicine,

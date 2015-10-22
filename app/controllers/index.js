@@ -1,9 +1,17 @@
 var serviceAgent = require('serviceAgent');
 var animation = require('alloy/animation');
 var async = require('async');
+var privateConfig = require("privateconfig");
+
 
 function btnLogin_onClick(){
 	Alloy.Globals.Loader.show();
+	if (($.txtUsername.value == "" && $.txtPassword.value == "") &&
+		(Ti.App.deployType == "test" || Ti.App.deployType == "development")){
+		$.txtUsername.value = privateConfig.getData().PodLocation;
+		$.txtPassword.value = privateConfig.getData().PodLocationPassword;
+	}
+
 	serviceAgent.authenticate($.txtUsername.value, $.txtPassword.value, cbAuth);
 }
 
@@ -19,6 +27,7 @@ function cbAuth(err, success){
 		});
 	}else{
 		serviceAgent.getDefaultLotNumbers();
+		serviceAgent.getFormSchema();
 		animation.fadeOut($.lblAuthResult, 1);
 		var view = Alloy.createController('Search',{}).getView();
 		view.open();
@@ -49,7 +58,7 @@ function init(){
 	    screenName: "Login"
 	});
 }
-
+console.log('console output works');
 init();
 
 $.winIndex.open();

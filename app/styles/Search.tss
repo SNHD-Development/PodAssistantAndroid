@@ -17,16 +17,6 @@
 	width: "50%"
 }
 
-"#btnQr":{
-	width: '100%',
-	height: 10,
-	backgroundColor: '#f0dec8',
-	color: "#796857",
-	font: {
-		fontSize: 15
-	},
-}
-
 "#btnSearch":{
 	backgroundColor: "#00c7eb",
 	color: 'white',

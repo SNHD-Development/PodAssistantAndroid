@@ -101,8 +101,10 @@ function btnSave_onClick(){
 }
 
 function cbLotNumbersReceived(err, lotNumbers){
-	if (err){
-		return;
+	if (err || !lotNumbers){
+		$.txtDoxyLot.editable = true;
+		$.txtCiproLot.editable = true; 
+
 	}
 	$.lotNumbers = lotNumbers;
 }

@@ -1,5 +1,11 @@
 <Alloy>
-	<Window id="winHousehold" title="Household Information">
+	<Window id="winHousehold" title="Household Information" onAndroidback="winHousehold_onAndroidback">
+		<OptionDialog id="odSave" title="You've forgotten to save changes. Save?" onClick="odSave_onClick">
+            <Options>
+                <Option>Yes</Option>
+                <Option>No</Option>
+            </Options>
+        </OptionDialog>
 		<ScrollView class="container">
 			<View class="vInfoRow" top="20">
 				<Label>Status:</Label>
@@ -20,7 +26,9 @@
 			<Label id="lblHouseholdMembers">Household Members</Label>
 			<TableView id="tvMembers" dataCollection="houseMembers" onClick="tvMembers_onClick">
 				<TableViewRow class="ctrMember">
-					<ImageView id="ivCheck" image="{checkedImage}" />
+					<View class="vCheckContainer">
+						<ImageView class="ivCheck" image="{checkedImage}" />	
+					</View>
 					<Label class="lblPatientData" text="{patientData}" />
 					<Label class="lblMedicine" text="{medicine}" />
 					<View class="itemSeparator"></View>
@@ -30,7 +38,7 @@
 				<ImageView id="ivSignature"></ImageView>
 				<Label id="lblGetSignature">Get Signature</Label>
 			</View>
-			<Button id="btnSave" title="SAVE" onClick="btnSave_onClick"></Button>
+			<Button id="btnComplete" title="COMPLETE" onClick="btnComplete_onClick"></Button>
 			<View id="vFooterPadding"></View>
 		</ScrollView>
 	</Window>

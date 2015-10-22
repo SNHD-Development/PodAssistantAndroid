@@ -81,7 +81,7 @@
 	right: 0,
 	height: Titanium.UI.FILL,
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-	width: 40,
+	width: 45,
 	font:{
 		fontSize: 16,
 		fontWeight: "bold"
@@ -96,12 +96,25 @@
 }
 
 "#ivCheck":{
-	height: 25,
-	width: 25,
-	left: 12
+	height: 30,
+	width: 30,
+	left: 8,
 }
 
-"#btnSave":{
+".vCheckContainer":{
+	width: 46,
+	left: 0,
+	height: Ti.UI.FILL,
+	borderColor: "white"
+}
+
+"#lblGetSignature":{
+	font:{
+		fontSize: 16
+	}
+}
+
+"#btnComplete":{
 	backgroundColor: "#00c7eb",
 	color: 'white',
 	width: 150,
@@ -116,8 +129,9 @@
 	top: 15,
 	width: 280,
 	height: 150,
-	borderColor: "#aaa",
-	borderWidth: 3
+	borderColor: "#ddd",
+	borderWidth: 3,
+	backgroundColor: "#ddd"
 }
 
 "#ivSignature":{
