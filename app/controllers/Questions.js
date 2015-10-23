@@ -15,6 +15,9 @@ function renderQA(){
 			return true;
 	});
 	questions.forEach(function(e){
+		if (args.data[e.Name] == null){
+			return;
+		}
 		var qLabel = $.UI.create("Label", {
 			classes: ["cQ"],
 			text: e.DescriptionPlainText

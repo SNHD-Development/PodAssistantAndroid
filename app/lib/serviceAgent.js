@@ -1,17 +1,34 @@
 var util = require ("util");
 var mockData = require("mockdata");
 var async = require('async');
-var privateConfig = require("privateconfig");
+var privateConfig;
+
+try{
+	privateConfig = require("privateconfig");
+}catch(e){
+}
 
 function getAuthHeader(){
-	var username = privateConfig.getData().Username;
-	var password = privateConfig.getData().Password;
+	if (privateConfig){
+		var username = privateConfig.getData().Username;
+		var password = privateConfig.getData().Password;	
+	}else{
+		var username = "username";
+		var password = "password";
+	}
 	var credentials = username + ':' + password;
 	var authHeaderValue = 'Basic ' + Ti.Utils.base64encode(credentials);
 	return authHeaderValue;
 }
 
 exports.getFormSchema = function(cb){
+	if (Alloy.CFG.MockDataMode){
+		Alloy.Globals.FormSchema = mockData.getFormSchema();
+		if (cb){
+			cb();
+		}
+		return;
+	}
 	var xhr = Ti.Network.createHTTPClient();
 	var url = Alloy.CFG.ApiBaseUri + "FormSchema?name=PODMedicalScreeningForm";
 	xhr.open("GET",  Alloy.CFG.ApiBaseUri + "FormSchema?name=PODMedicalScreeningForm");
@@ -42,8 +59,8 @@ exports.getDefaultLotNumbers = function(){
 	Alloy.Globals.DefaultDoxyLotNum = "";
 	Alloy.Globals.DefaultCiproLotNum = "";
 	if (Alloy.CFG.MockDataMode){
-		Alloy.Globals.DefaultDoxyLotNum = "D12";
-		Alloy.Globals.DefaultCiproLotNum = "D34";
+		Alloy.Globals.DefaultDoxyLotNum = "D-12345";
+		Alloy.Globals.DefaultCiproLotNum = "C-12345";
 		return;
 	}
 	var xhr = Ti.Network.createHTTPClient();
