@@ -22,6 +22,6 @@ Alternatively, you can set up a web service to output data similar to that in ap
 
 ### Screenshots
 
-![Alt text](/screenshots/ipad4.png?raw=true "Login Screen")
-![Alt text](/screenshots/ipad5.png?raw=true "Search Screen")
-![Alt text](/screenshots/ipad6.png?raw=true "Household Screen")
+![Alt text](/screenshots/4.png?raw=true "Login Screen")
+![Alt text](/screenshots/5.png?raw=true "Search Screen")
+![Alt text](/screenshots/6.png?raw=true "Household Screen")
