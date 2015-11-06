@@ -23,7 +23,6 @@ function cbSearchResults(err, searchResults){
 }
 
 function btnSearch_onClick(){
-	$.btnSearch.enabled = false;
 	var firstName = $.txtFirstName.value.trim();
 	var lastName = $.txtLastName.value.trim();
 	var phoneNumber = $.txtPhoneNumber.value.trim();
@@ -37,6 +36,7 @@ function btnSearch_onClick(){
 		return;
 	}
 	Alloy.Globals.Loader.show();
+	$.btnSearch.enabled = false;
 	serviceAgent.getSearchResults(firstName,lastName,phoneNumber,cbSearchResults);
 }
 
