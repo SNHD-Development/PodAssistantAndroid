@@ -57,12 +57,20 @@
 	}
 }
 
+"#ivSnpodLogo":{
+	image: "/images/snpod.png",
+	height: 67,
+	width: 120,
+	zIndex: 2,
+	bottom: 80
+}
+
 "#ivSnhdLogo":{
 	image: "/images/snhd_logo_blue.png",
 	height: 67,
 	width: 120,
 	zIndex: 2,
-	bottom: 115
+	bottom: 162
 }
 
 "#ivSnhdLogo[formFactor=tablet]":{

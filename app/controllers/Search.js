@@ -5,6 +5,7 @@ var async = require('async');
 var args = arguments[0] || {};
 
 function cbSearchResults(err, searchResults){
+	$.btnSearch.enabled = true;
 	Alloy.Globals.Loader.hide();
 	if (err || searchResults == null){
 		$.toast = Alloy.createWidget('net.beyondlink.toast');
@@ -31,8 +32,12 @@ function btnSearch_onClick(){
 		firstName = "Fred";
 		lastName = "Jones";
 	}
-	if (!phoneNumber && (!firstName || !lastName)){
-		alert ("Please enter both first name and last name, or a phone number to search");
+	if (!phoneNumber && !firstName && !lastName){
+		alert ("Please enter search criteria");
+		return;
+	}
+	if (!phoneNumber && firstName && !lastName){
+		alert ("Please also enter a last name to search");
 		return;
 	}
 	Alloy.Globals.Loader.show();

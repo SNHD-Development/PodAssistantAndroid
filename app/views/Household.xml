@@ -6,6 +6,12 @@
                 <Option>No</Option>
             </Options>
         </OptionDialog>
+        <OptionDialog id="odSaveNoSignature" title="Signature not captured. Save?" onClick="odSaveNoSignature_onClick">
+            <Options>
+                <Option>Yes</Option>
+                <Option>No</Option>
+            </Options>
+        </OptionDialog>
 		<ScrollView class="container">
 			<View class="vInfoRow" top="20">
 				<Label>Status:</Label>

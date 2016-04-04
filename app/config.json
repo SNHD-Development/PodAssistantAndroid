@@ -6,7 +6,7 @@
     "SignatureImageHeight": 300
   },
   "env:development": {
-  	"ApiBaseUri": "https://api.southernnevadahealthdistrict.org/",
+  	"ApiBaseUri": "https://api-dev.southernnevadahealthdistrict.org/",
     "MockDataMode": false
   },
   "env:test": {

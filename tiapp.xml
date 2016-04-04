@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>org.cchd.podapp</id>
     <name>POD Assistant</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <publisher>Southern Nevada Health District</publisher>
     <url>https://southernnevadahealthdistrict.org/</url>
     <description>This app is to be used by personnel at POD (Point of Dispensing) sites to dispense medicine. A POD is a location where you can go to get medications or vaccines during a public health emergency.</description>
@@ -14,8 +14,8 @@
     <guid>5a7f72af-86e2-469d-9000-e7e4761a8652</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="103" android:versionName="1.0.3">
-            <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="21"/>
+        <manifest android:versionCode="104" android:versionName="1.0.4">
+            <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="23"/>
         </manifest>
     </android>
     <mobileweb>
@@ -38,7 +38,7 @@
         <target device="mobileweb">false</target>
         <target device="windows">false</target>
     </deployment-targets>
-    <sdk-version>5.0.0.GA</sdk-version>
+    <sdk-version>5.2.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>
